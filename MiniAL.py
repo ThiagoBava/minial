@@ -4,7 +4,11 @@ import re
 regex_identificador = r'[a-zA-Z]+'
 regex_numero_inteiro = r'[0-9]+'
 regex_numero_real = r'[0-9]+\.[0-9]+'
-regex_operadores = r'[+\-*/]'
+regex_soma = r'\+'
+regex_subtracao = r'-'
+regex_multiplicacao = r'\*'
+regex_divisao = r'/'
+# regex_operadores = r'[+\-*/]'
 regex_atribuicao = r'='
 regex_parenteses = r'[()]'
 regex_fim_de_linha = r'\n'
@@ -14,10 +18,10 @@ tokens = {
     'IDENTIFICADOR': regex_identificador,
     'NUMERO_INTEIRO': regex_numero_inteiro,
     'NUMERO_REAL': regex_numero_real,
-    'SOMA': regex_operadores,
-    'SUBTRACAO': regex_operadores,
-    'MULTIPLICACAO': regex_operadores,
-    'DIVISAO': regex_operadores,
+    'OPERADOR_SOMA': regex_soma,
+    'OPERADOR_SUBTRACAO': regex_subtracao,
+    'OPERADOR_MULTIPLICACAO': regex_multiplicacao,
+    'OPERADOR_DIVISAO': regex_divisao,
     'ATRIBUICAO': regex_atribuicao,
     'ABRE_PARENTESES': regex_parenteses,
     'FECHA_PARENTESES': regex_parenteses,
@@ -68,7 +72,7 @@ def analisar(expressao):
     return tokens_encontrados, erros
 
 # Exemplo de uso
-expressao = 'x = 5 - 1 * (4 + 1)\n'
+expressao = 'x = 5 - 1.3 * 4 + 1)\n'
 tabela_simbolos = {}
 tokens_encontrados, erros = analisar(expressao)
 
