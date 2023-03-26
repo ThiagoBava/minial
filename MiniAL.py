@@ -3,21 +3,20 @@ import re
 # Define uma expressão regular para cada tipo de token
 regex_identificador = r'[a-zA-Z]+'
 regex_numero_inteiro = r'[0-9]+'
-regex_numero_real = r'[0-9]+\.[0-9]+'
+regex_numero_real = r'[0-9]\.[0-9]+'
 regex_soma = r'\+'
 regex_subtracao = r'-'
 regex_multiplicacao = r'\*'
 regex_divisao = r'/'
-# regex_operadores = r'[+\-*/]'
 regex_atribuicao = r'='
 regex_parenteses = r'[()]'
 regex_fim_de_linha = r'\n'
 
 # Associa cada expressão regular a um nome de token
 tokens = {
+    'NUMERO_REAL': regex_numero_real,
     'IDENTIFICADOR': regex_identificador,
     'NUMERO_INTEIRO': regex_numero_inteiro,
-    'NUMERO_REAL': regex_numero_real,
     'OPERADOR_SOMA': regex_soma,
     'OPERADOR_SUBTRACAO': regex_subtracao,
     'OPERADOR_MULTIPLICACAO': regex_multiplicacao,
@@ -72,7 +71,7 @@ def analisar(expressao):
     return tokens_encontrados, erros
 
 # Exemplo de uso
-expressao = 'x = 5 - 1.3 * 4 + 1)\n'
+expressao = 'x = 5 - * 4.2 + 1)\n'
 tabela_simbolos = {}
 tokens_encontrados, erros = analisar(expressao)
 
