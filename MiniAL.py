@@ -1,30 +1,30 @@
 import re
 
 # Define uma expressão regular para cada tipo de token
-regex_identificador = r'[a-zA-Z]+'
-regex_numero_inteiro = r'[0-9]+'
-regex_numero_real = r'[0-9]\.[0-9]+'
-regex_soma = r'\+'
-regex_subtracao = r'-'
-regex_multiplicacao = r'\*'
-regex_divisao = r'/'
-regex_atribuicao = r'='
-regex_parenteses = r'[()]'
-regex_fim_de_linha = r'\n'
+regexIdentificador = r'[a-zA-Z]+'
+regexNumeroInteiro = r'[0-9]+'
+regexNumeroReal = r'[0-9]\.[0-9]+'
+regexSoma = r'\+'
+regexSubtracao = r'-'
+regexMultiplicacao = r'\*'
+regexDivisao = r'/'
+regexAtribuicao = r'='
+regexParenteses = r'[()]'
+regexFimDeLinha = r'\n'
 
 # Associa cada expressão regular a um nome de token
 tokens = {
-    'NUMERO_REAL': regex_numero_real,
-    'IDENTIFICADOR': regex_identificador,
-    'NUMERO_INTEIRO': regex_numero_inteiro,
-    'OPERADOR_SOMA': regex_soma,
-    'OPERADOR_SUBTRACAO': regex_subtracao,
-    'OPERADOR_MULTIPLICACAO': regex_multiplicacao,
-    'OPERADOR_DIVISAO': regex_divisao,
-    'ATRIBUICAO': regex_atribuicao,
-    'ABRE_PARENTESES': regex_parenteses,
-    'FECHA_PARENTESES': regex_parenteses,
-    'FIM_DE_LINHA': regex_fim_de_linha,
+    'NUMERO_REAL': regexNumeroReal,
+    'IDENTIFICADOR': regexIdentificador,
+    'NUMERO_INTEIRO': regexNumeroInteiro,
+    'OPERADOR_SOMA': regexSoma,
+    'OPERADOR_SUBTRACAO': regexSubtracao,
+    'OPERADOR_MULTIPLICACAO': regexMultiplicacao,
+    'OPERADOR_DIVISAO': regexDivisao,
+    'ATRIBUICAO': regexAtribuicao,
+    'ABRE_PARENTESES': regexParenteses,
+    'FECHA_PARENTESES': regexParenteses,
+    'FIM_DE_LINHA': regexFimDeLinha,
 }
 
 # Função para analisar uma expressão
@@ -34,7 +34,7 @@ def analisar(expressao):
 
     # Inicializa as variáveis de estado
     posicao = 0
-    tokens_encontrados = []
+    tokensEncontrados = []
     erros = []
 
     # Enquanto não chegamos no final da expressão
@@ -53,12 +53,12 @@ def analisar(expressao):
                 if nome == 'IDENTIFICADOR':
                     # Se for um identificador, adiciona à lista de tokens encontrados
                     # e registra seu índice na tabela de símbolos
-                    if valor not in tabela_simbolos:
-                        tabela_simbolos[valor] = len(tabela_simbolos) + 1
-                    tokens_encontrados.append((nome, tabela_simbolos[valor]))
+                    if valor not in tabelaSimbolos:
+                        tabelaSimbolos[valor] = len(tabelaSimbolos) + 1
+                    tokensEncontrados.append((nome, valor))
                 else:
                     # Senão, adiciona o token à lista de tokens encontrados
-                    tokens_encontrados.append((nome, valor))
+                    tokensEncontrados.append((nome, valor))
                 posicao += len(valor)
                 break
 
@@ -68,16 +68,17 @@ def analisar(expressao):
             posicao += 1
 
     # Retorna a lista de tokens encontrados e a lista de erros
-    return tokens_encontrados, erros
+    return tokensEncontrados, erros
 
 # Exemplo de uso
-expressao = 'x = 5 - * 4.2 + 1)\n'
-tabela_simbolos = {}
-tokens_encontrados, erros = analisar(expressao)
+expressao = 'x = 5 \n y = 2 \n z = x + y'
+# expressao = input("Digite sua expressão: ")
+tabelaSimbolos = {}
+tokensEncontrados, erros = analisar(expressao)
 
 # Imprime os tokens encontrados e os erros (se houverem)
 print('Tokens encontrados:')
-for token in tokens_encontrados:
+for token in tokensEncontrados:
     print(token)
 print('Erros:')
 for erro in erros:
