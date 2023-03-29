@@ -2,8 +2,10 @@ import re
 
 # Define uma expressão regular para cada tipo de token
 regexIdentificador = r'[a-zA-Z]+'
-regexNumeroInteiro = r'[0-9]+'
-regexNumeroReal = r'[0-9]\.[0-9]+'
+regexNumeroInteiroNegativo = r'-[0-9]+'
+regexNumeroInteiroPositivo = r'[0-9]+'
+regexNumeroRealNegativo = r'-[0-9]+\.[0-9]+'
+regexNumeroRealPositivo = r'[0-9]+\.[0-9]+'
 regexSoma = r'\+'
 regexSubtracao = r'-'
 regexMultiplicacao = r'\*'
@@ -14,9 +16,11 @@ regexFimDeLinha = r'\n'
 
 # Associa cada expressão regular a um nome de token
 tokens = {
-    'NUMERO_REAL': regexNumeroReal,
+    'NUMERO_REAL_NEGATIVO': regexNumeroRealNegativo,
+    'NUMERO_REAL_POSITIVO': regexNumeroRealPositivo,
     'IDENTIFICADOR': regexIdentificador,
-    'NUMERO_INTEIRO': regexNumeroInteiro,
+    'NUMERO_INTEIRO_NEGATIVO': regexNumeroInteiroNegativo,
+    'NUMERO_INTEIRO_POSITIVO': regexNumeroInteiroPositivo,
     'OPERADOR_SOMA': regexSoma,
     'OPERADOR_SUBTRACAO': regexSubtracao,
     'OPERADOR_MULTIPLICACAO': regexMultiplicacao,
@@ -71,7 +75,7 @@ def analisar(expressao):
     return tokensEncontrados, erros
 
 # Exemplo de uso
-expressao = 'x = 5 \n y = 2 \n z = x + y'
+expressao = '-32.3 * X + 7'
 # expressao = input("Digite sua expressão: ")
 tabelaSimbolos = {}
 tokensEncontrados, erros = analisar(expressao)
