@@ -80,7 +80,7 @@ expressao = '-32.3 * X + 7'
 tabelaSimbolos = {}
 tokensEncontrados, erros = analisar(expressao)
 
-# Imprime os tokens encontrados e os erros (se houverem)
+# Imprime os tokens encontrados e os erros
 print('Tokens encontrados:')
 for token in tokensEncontrados:
     print(token)
